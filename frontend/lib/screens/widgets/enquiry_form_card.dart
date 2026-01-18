@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class EnquiryFormCard extends StatelessWidget {
-  // CHANGED: Added nameCtrl, removed user type logic
+  // ADDED: phoneCtrl
   final TextEditingController nameCtrl;
   final TextEditingController emailCtrl;
+  final TextEditingController phoneCtrl;
   final TextEditingController cityCtrl;
+  
   final String selectedPropertyType;
   final ValueChanged<String?> onPropertyTypeChanged;
   final bool isLoading;
@@ -14,6 +16,7 @@ class EnquiryFormCard extends StatelessWidget {
     super.key,
     required this.nameCtrl,
     required this.emailCtrl,
+    required this.phoneCtrl,
     required this.cityCtrl,
     required this.selectedPropertyType,
     required this.onPropertyTypeChanged,
@@ -44,7 +47,6 @@ class EnquiryFormCard extends StatelessWidget {
           const SizedBox(height: 24),
           _buildPropertyTypeDropdown(),
           const SizedBox(height: 16),
-          // REPLACED: User type buttons are now a Name field
           _buildTextField(
             controller: nameCtrl,
             label: 'Your Name',
@@ -57,6 +59,15 @@ class EnquiryFormCard extends StatelessWidget {
             label: 'Email Address',
             hint: 'email@example.com',
             icon: Icons.email,
+          ),
+          const SizedBox(height: 16),
+          // ADDED: Phone number text field
+          _buildTextField(
+            controller: phoneCtrl,
+            label: 'Phone Number',
+            hint: 'Enter your phone number',
+            icon: Icons.phone,
+            keyboardType: TextInputType.phone,
           ),
           const SizedBox(height: 16),
           _buildTextField(
@@ -95,7 +106,7 @@ class EnquiryFormCard extends StatelessWidget {
   Widget _buildPropertyTypeDropdown() {
     // ... this method remains unchanged
     final List<String> propertyTypes = [
-       'Bungalow', 'Flat', 'Commercial'
+      'Bungalow', 'Flat', 'Commercial'
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,15 +139,14 @@ class EnquiryFormCard extends StatelessWidget {
     );
   }
 
-  // REMOVED: The _buildUserTypeSelector and _buildUserTypeButton methods are gone
-
+  // UPDATED: Added optional keyboardType parameter
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
     required String hint,
     required IconData icon,
+    TextInputType keyboardType = TextInputType.text,
   }) {
-    // ... this method remains unchanged
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -145,6 +155,7 @@ class EnquiryFormCard extends StatelessWidget {
         TextField(
           controller: controller,
           style: const TextStyle(color: Colors.white),
+          keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
@@ -155,7 +166,7 @@ class EnquiryFormCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
             ),
-             enabledBorder: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
             ),
@@ -185,3 +196,4 @@ class EnquiryFormCard extends StatelessWidget {
     );
   }
 }
+

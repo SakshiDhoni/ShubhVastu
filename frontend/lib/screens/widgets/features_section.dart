@@ -6,28 +6,35 @@ class FeaturesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 40),
+      // CORRECTED: Reduced vertical padding
+      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
       color: Colors.grey[50],
       child: Column(
         children: [
           const Text(
-            'Why Choose CtoC Broker?',
+            // CORRECTED: Changed the company name
+            'Why Choose ShubhVastu?',
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 42,
+              // CORRECTED: Reduced font size
+              fontSize: 36,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1F2937), // Darker text for light background
+              color: Color(0xFF1F2937),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           Text(
-            'We connect customers and contractors directly, making transactions seamless.',
+            // CORRECTED: Updated the tagline to be more relevant
+            'Your trusted partner in finding the perfect property.',
             style: TextStyle(
-              fontSize: 20,
+              // CORRECTED: Reduced font size
+              fontSize: 18,
               color: Colors.grey[700],
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 80),
+          // CORRECTED: Reduced spacing
+          const SizedBox(height: 60),
           const Wrap(
             spacing: 40,
             runSpacing: 40,
@@ -36,17 +43,20 @@ class FeaturesSection extends StatelessWidget {
               _FeatureCard(
                 icon: Icons.handshake_rounded,
                 title: 'Direct Connection',
-                description: 'Connect directly with contractors or customers without intermediaries.',
+                // CORRECTED: Updated feature description
+                description: 'Connect directly with owners and buyers, ensuring transparency.',
               ),
               _FeatureCard(
                 icon: Icons.verified_user_rounded,
                 title: 'Verified Listings',
-                description: 'All property and service listings are verified for authenticity and quality.',
+                // CORRECTED: Updated feature description
+                description: 'Every property is thoroughly checked and verified by our expert team.',
               ),
               _FeatureCard(
                 icon: Icons.support_agent_rounded,
                 title: '24/7 Support',
-                description: 'Round-the-clock customer support to assist you at every step of the way.',
+                // CORRECTED: Updated feature description
+                description: 'Our dedicated support team is here to help you at every step of your journey.',
               ),
             ],
           ),
@@ -70,8 +80,10 @@ class _FeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
-      padding: const EdgeInsets.all(32),
+      // CORRECTED: Reduced card width
+      width: 260,
+      // CORRECTED: Reduced padding
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -86,8 +98,9 @@ class _FeatureCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 80,
-            height: 80,
+            // CORRECTED: Reduced icon container size
+            width: 70,
+            height: 70,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [Color(0xFF2563EB), Color(0xFF3B82F6)],
@@ -96,23 +109,26 @@ class _FeatureCard extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(icon, color: Colors.white, size: 40),
+            // CORRECTED: Reduced icon size
+            child: Icon(icon, color: Colors.white, size: 36),
           ),
           const SizedBox(height: 24),
           Text(
             title,
             style: const TextStyle(
-              fontSize: 22,
+              // CORRECTED: Reduced font size
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Color(0xFF1F2937),
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           Text(
             description,
             style: TextStyle(
-              fontSize: 16,
+              // CORRECTED: Reduced font size
+              fontSize: 15,
               color: Colors.grey[600],
               height: 1.5,
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../services/api_service.dart'; // Using the ApiService for cleaner code
+// import '../services/api_service.dart'; // ApiService call is commented out below
 
 // Import widget components
 import 'widgets/app_navigation_bar.dart';
@@ -16,33 +16,31 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-// CORRECTED: The 'auth' state is no longer needed
 enum FormType { enquiry, success }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  // --- STATE AND CONTROLLERS (CORRECTED) ---
+  // --- STATE AND CONTROLLERS ---
   FormType _currentForm = FormType.enquiry;
   bool _isLoading = false;
   String _selectedPropertyType = '';
- // String _selectedUserType = 'Customer';
 
-  // Using a dedicated controller for the enquiry email
+  // Using dedicated controllers for the enquiry form
   final _nameCtrl = TextEditingController();
   final _enquiryEmailCtrl = TextEditingController();
+  final _phoneCtrl = TextEditingController(); // Controller for phone number
   final _cityCtrl = TextEditingController();
-  
-  // REMOVED: All controllers for the old auth form are gone
 
   @override
   void dispose() {
     _nameCtrl.dispose();
     _enquiryEmailCtrl.dispose();
+    _phoneCtrl.dispose(); // Dispose the new controller
     _cityCtrl.dispose();
     super.dispose();
   }
-  
+
   void _showSnack(String msg, {bool isError = false}) {
-     ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(msg),
         backgroundColor: isError ? Colors.redAccent : const Color(0xFF2563EB),
@@ -53,16 +51,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  // --- LOGIC (CORRECTED) ---
+  // --- LOGIC (UPDATED) ---
   
-  // This is the only submission logic needed now
+  // This is the only submission logic needed now. Email sending is commented out.
   Future<void> _handleEnquirySubmit() async {
     final name = _nameCtrl.text.trim();
     final email = _enquiryEmailCtrl.text.trim();
+    final phone = _phoneCtrl.text.trim(); // Get phone number
     final city = _cityCtrl.text.trim();
 
-    // Updated validation for a valid email
-    if (!email.contains('@') || city.isEmpty || _selectedPropertyType.isEmpty) {
+    // Validation now includes the phone number
+    if (name.isEmpty || !email.contains('@') || phone.isEmpty || city.isEmpty || _selectedPropertyType.isEmpty) {
       _showSnack('Please fill all fields with a valid email.', isError: true);
       return;
     }
@@ -71,41 +70,46 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     try {
       // Step 1: Save to Firestore
+      // Added phone number to the Firestore document
       await FirebaseFirestore.instance.collection('user_inquiries').add({
         'name': name,
         'contact': email,
+        'phone': phone,
         'city': city,
         'propertyType': _selectedPropertyType,
-        //'userType': _selectedUserType,
         'timestamp': FieldValue.serverTimestamp(),
       });
 
-      // Step 2: Call the backend via the ApiService (cleaner)
-      final response = await ApiService.handleEnquiry(
-        name: name,
-        contact: email,
-        city: city,
-        propertyType: _selectedPropertyType,
-       // userType: _selectedUserType,
-      );
+      // --- EMAIL SENDING LOGIC COMMENTED OUT ---
+      // final response = await ApiService.handleEnquiry(
+      //   name: name,
+      //   contact: email,
+      //   city: city,
+      //   propertyType: _selectedPropertyType,
+      // );
 
-      if (response.statusCode == 200) {
-        _showSnack('Enquiry sent successfully!');
-        setState(() => _currentForm = FormType.success);
-      } else {
-        throw Exception('Server responded with status code: ${response.statusCode}');
-      }
+      // if (response.statusCode == 200) {
+      //   _showSnack('Enquiry sent successfully!');
+      //   setState(() => _currentForm = FormType.success);
+      // } else {
+      //   throw Exception('Server responded with status code: ${response.statusCode}');
+      // }
+      // --- END OF COMMENTED CODE ---
+
+      // Directly show success after saving to Firestore since the email step is bypassed.
+      _showSnack('Enquiry submitted successfully!');
+      setState(() => _currentForm = FormType.success);
+
     } catch (e) {
-      _showSnack('Submission failed. Could not connect to the server.', isError: true);
+      // Updated the error message to be more general.
+      _showSnack('Submission failed. Please try again later.', isError: true);
       print('❌ Submission Error: $e');
     } finally {
       setState(() => _isLoading = false);
     }
   }
 
-  // REMOVED: The entire _handleAuthSubmit function is gone
-
-  // --- BUILD METHOD (CORRECTED) ---
+  // --- BUILD METHOD ---
   
   @override
   Widget build(BuildContext context) {
@@ -122,7 +126,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                // CORRECTED: No callback needed for the button that was removed
                 const AppNavigationBar(),
                 SizedBox(
                   height: 900,
@@ -150,31 +153,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           key: const ValueKey('enquiry'),
           nameCtrl: _nameCtrl,
           emailCtrl: _enquiryEmailCtrl,
+          phoneCtrl: _phoneCtrl, // Pass phone controller
           cityCtrl: _cityCtrl,
           selectedPropertyType: _selectedPropertyType,
           onPropertyTypeChanged: (value) => setState(() => _selectedPropertyType = value ?? ''),
-        //  selectedUserType: _selectedUserType,
-         // onUserTypeChanged: (value) => setState(() => _selectedUserType = value),
           isLoading: _isLoading,
           onSubmit: _handleEnquirySubmit,
         );
-      
-      // REMOVED: The case for the auth form is gone
       
       case FormType.success:
         return SuccessCard(
           key: const ValueKey('success'),
           onReset: () {
             _nameCtrl.clear();
-             _enquiryEmailCtrl.clear();
-             _cityCtrl.clear();
-             setState(() {
-               _selectedPropertyType = '';
-              // _selectedUserType = 'Customer';
-               _currentForm = FormType.enquiry;
-             });
+              _enquiryEmailCtrl.clear();
+              _phoneCtrl.clear(); // Clear phone field on reset
+              _cityCtrl.clear();
+              setState(() {
+                _selectedPropertyType = '';
+                _currentForm = FormType.enquiry;
+              });
           },
         );
     }
   }
 }
+
