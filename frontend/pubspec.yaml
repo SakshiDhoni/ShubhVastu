@@ -17,6 +17,7 @@ dependencies:
   cloud_firestore: ^4.15.3
   firebase_auth_web: ^5.7.3
   google_sign_in: ^6.1.0
+  dropdown_button2: ^2.3.9
 
   # HTTP & file upload
   http: any

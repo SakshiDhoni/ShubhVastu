@@ -13,7 +13,7 @@ class FeaturesSection extends StatelessWidget {
         children: [
           const Text(
             // CORRECTED: Changed the company name
-            'Why Choose ShubhVastu?',
+            'Why Choose SwapnaVastu?',
             textAlign: TextAlign.center,
             style: TextStyle(
               // CORRECTED: Reduced font size

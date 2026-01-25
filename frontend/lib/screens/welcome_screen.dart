@@ -122,7 +122,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.5))),
+          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.4))),
           SingleChildScrollView(
             child: Column(
               children: [
