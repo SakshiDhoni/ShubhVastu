@@ -1,6 +1,7 @@
 {
-  "buildCommand": "flutter build web --release",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "build/web",
+  "installCommand": "echo 'Skipping default Vercel install command, handled in buildCommand'",
   "cleanUrls": true,
   "routes": [
     { "src": "/(.*)", "dest": "/index.html" }
