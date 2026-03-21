@@ -116,13 +116,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1920&q=80',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.4))),
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/background_img.jpg',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    color: const Color(0xFF1a1a2e),
+                  ),
+                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                    if (wasSynchronouslyLoaded || frame != null) return child;
+                    return Container(color: const Color(0xFF1a1a2e));
+                  },
+                ),
+              ),
+          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.5))),
           SingleChildScrollView(
             child: Column(
               children: [

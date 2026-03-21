@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_svg: ^2.0.10
+
   # Firebase
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.3
@@ -38,3 +40,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/lotus_logo.svg
+    - assets/background_img.jpg

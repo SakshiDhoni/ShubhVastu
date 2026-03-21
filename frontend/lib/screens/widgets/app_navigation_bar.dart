@@ -1,5 +1,7 @@
+
 import 'dart:ui'; // Required for the blur effect
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({
@@ -26,18 +28,18 @@ class AppNavigationBar extends StatelessWidget {
                 // App Logo and Title
                 Row(
                   children: [
-                    Image.asset(
-                      'assets/images/logo.png', // The path to your image
-                      height: 100,
-                      width: 100, // Control the size of your logo
+                    SvgPicture.asset(
+                      'assets/images/lotus_logo.svg',
+                      height: 60,
+                      width: 60,
                     ),
-                    //const SizedBox(width: ),
+                    const SizedBox(width: 16),
                     const Text(
-                      'SwapnaVastu', // YOUR CHANGE: Using your new title
+                      'SwapnaVastu',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white, // Color is white for better contrast
+                        color: Colors.white,
                       ),
                     ),
                   ],
