@@ -149,6 +149,14 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
                     height: double.infinity,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      color: Colors.grey.withOpacity(0.2),
+                      child: const Center(
+                        child: Icon(Icons.broken_image, color: Colors.white54, size: 48),
+                      ),
+                    ),
                   ),
                   Positioned(
                     bottom: 16,

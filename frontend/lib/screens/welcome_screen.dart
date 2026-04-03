@@ -61,9 +61,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final phone = _phoneCtrl.text.trim(); // Get phone number
     final city = _cityCtrl.text.trim();
 
-    // Validation now includes the phone number
-    if (name.isEmpty || !email.contains('@') || phone.isEmpty || city.isEmpty || _selectedPropertyType.isEmpty) {
-      _showSnack('Please fill all fields with a valid email.', isError: true);
+    final emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+    // Validation now includes strict email regex and phone minimum digits
+    if (name.isEmpty || !emailRegex.hasMatch(email) || phone.length < 10 || city.isEmpty || _selectedPropertyType.isEmpty) {
+      _showSnack('Please check your inputs. Ensure the email is valid and phone has at least 10 digits.', isError: true);
       return;
     }
 
@@ -71,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     try {
       // Step 1: Save to Firestore
-      // Added phone number to the Firestore document
+      // Added phone number to the Firestore document with a network timeout
       await FirebaseFirestore.instance.collection('user_inquiries').add({
         'name': name,
         'contact': email,
@@ -79,6 +81,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         'city': city,
         'propertyType': _selectedPropertyType,
         'timestamp': FieldValue.serverTimestamp(),
+      }).timeout(const Duration(seconds: 10), onTimeout: () {
+        throw Exception('Network timeout. Please check your internet connection.');
       });
 
       // --- EMAIL SENDING LOGIC COMMENTED OUT ---
@@ -102,8 +106,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       setState(() => _currentForm = FormType.success);
 
     } catch (e) {
-      // Updated the error message to be more general.
-      _showSnack('Submission failed. Please try again later.', isError: true);
+      String errorStr = e.toString().contains('Exception:') 
+          ? e.toString().split('Exception:')[1].trim() 
+          : 'Submission failed. Please check your internet connection.';
+      _showSnack(errorStr, isError: true);
       print('❌ Submission Error: $e');
     } finally {
       setState(() => _isLoading = false);

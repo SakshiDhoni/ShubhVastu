@@ -258,6 +258,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/services.dart';
 
 class EnquiryFormCard extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -315,6 +316,7 @@ class EnquiryFormCard extends StatelessWidget {
                 label: 'Your Name',
                 hint: 'Enter your full name',
                 icon: Icons.person,
+                maxLength: 50,
               ),
               const SizedBox(height: 16),
               _buildTextField(
@@ -322,6 +324,8 @@ class EnquiryFormCard extends StatelessWidget {
                 label: 'Email Address',
                 hint: 'email@example.com',
                 icon: Icons.email,
+                keyboardType: TextInputType.emailAddress,
+                maxLength: 100,
               ),
               const SizedBox(height: 16),
               _buildTextField(
@@ -330,6 +334,8 @@ class EnquiryFormCard extends StatelessWidget {
                 hint: 'Enter your phone number',
                 icon: Icons.phone,
                 keyboardType: TextInputType.phone,
+                maxLength: 15,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
               const SizedBox(height: 16),
               _buildTextField(
@@ -337,6 +343,7 @@ class EnquiryFormCard extends StatelessWidget {
                 label: 'City',
                 hint: 'Enter your city',
                 icon: Icons.location_city,
+                maxLength: 50,
               ),
               const SizedBox(height: 24),
               SizedBox(
@@ -469,6 +476,8 @@ class EnquiryFormCard extends StatelessWidget {
     required String hint,
     required IconData icon,
     TextInputType keyboardType = TextInputType.text,
+    int? maxLength,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,6 +493,8 @@ class EnquiryFormCard extends StatelessWidget {
         TextField(
           controller: controller,
           keyboardType: keyboardType,
+          maxLength: maxLength,
+          inputFormatters: inputFormatters,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             hintText: hint,

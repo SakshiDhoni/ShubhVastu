@@ -42,6 +42,7 @@ class AuthFormCard extends StatelessWidget {
             label: 'Username',
             hint: 'Enter your username',
             icon: Icons.person,
+            maxLength: 30,
           ),
           const SizedBox(height: 16),
           _buildTextField(
@@ -49,6 +50,7 @@ class AuthFormCard extends StatelessWidget {
             label: 'Email',
             hint: 'Enter your email',
             icon: Icons.email,
+            maxLength: 100,
           ),
           const SizedBox(height: 16),
           _buildTextField(
@@ -57,6 +59,7 @@ class AuthFormCard extends StatelessWidget {
             hint: 'Enter your password',
             icon: Icons.lock,
             isObscure: true,
+            maxLength: 50,
           ),
           // --- ADDED FORM FIELDS END HERE ---
           
@@ -86,6 +89,7 @@ class AuthFormCard extends StatelessWidget {
     required String hint,
     required IconData icon,
     bool isObscure = false,
+    int? maxLength,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,6 +99,7 @@ class AuthFormCard extends StatelessWidget {
         TextField(
           controller: controller,
           obscureText: isObscure,
+          maxLength: maxLength,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             hintText: hint,
