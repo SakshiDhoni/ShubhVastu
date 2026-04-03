@@ -8,6 +8,7 @@ import 'widgets/enquiry_form_card.dart';
 import 'widgets/success_card.dart';
 import 'widgets/features_section.dart';
 import 'widgets/app_footer.dart';
+import 'widgets/property_carousel.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -16,11 +17,11 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-enum FormType { enquiry, success }
+enum FormType { carousel, enquiry, success }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   // --- STATE AND CONTROLLERS ---
-  FormType _currentForm = FormType.enquiry;
+  FormType _currentForm = FormType.carousel;
   bool _isLoading = false;
   String _selectedPropertyType = '';
 
@@ -155,6 +156,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   
   Widget _buildFormContent() {
     switch (_currentForm) {
+      case FormType.carousel:
+        return PropertyCarousel(
+          key: const ValueKey('carousel'),
+          onCardTap: () {
+            setState(() {
+              _currentForm = FormType.enquiry;
+            });
+          },
+        );
+
       case FormType.enquiry:
         return EnquiryFormCard(
           key: const ValueKey('enquiry'),
@@ -178,7 +189,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               _cityCtrl.clear();
               setState(() {
                 _selectedPropertyType = '';
-                _currentForm = FormType.enquiry;
+                _currentForm = FormType.carousel;
               });
           },
         );
