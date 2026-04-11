@@ -22,7 +22,7 @@ class AppFooter extends StatelessWidget {
               ),
               _FooterContactInfo(
                 icon: Icons.email,
-                text: 'swapnavastu@gmail.com', // UPDATED: Email address
+                text: 'swapna.vastu05@gmail.com', // UPDATED: Email address
               ),
               _FooterContactInfo(
                 icon: Icons.location_on,

@@ -43,6 +43,42 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
       'address': 'Alibaug, Maharashtra',
       'price': '₹ 4.8 Cr'
     },
+    {
+      'image': 'https://images.unsplash.com/photo-1600607687920-4e20b33a8512',
+      'title': 'Seaview Apartment',
+      'address': 'Marine Drive, Mumbai',
+      'price': '₹ 15.5 Cr'
+    },
+    {
+      'image': 'https://images.unsplash.com/photo-1600566752355-35792bedcfea',
+      'title': 'Hill Station Villa',
+      'address': 'Khandala, Maharashtra',
+      'price': '₹ 4.2 Cr'
+    },
+    {
+      'image': 'https://images.unsplash.com/photo-1600121848594-d86fe4ca4aa6',
+      'title': 'Smart Home Duplex',
+      'address': 'Powai, Mumbai',
+      'price': '₹ 6.8 Cr'
+    },
+    {
+      'image': 'https://images.unsplash.com/photo-1600047509807-ba8f99c24ce6',
+      'title': 'Riverside Mansion',
+      'address': 'Karjat, Maharashtra',
+      'price': '₹ 3.5 Cr'
+    },
+    {
+      'image': 'https://images.unsplash.com/photo-1600566753190-17340a560962',
+      'title': 'Premium Studio',
+      'address': 'Andheri West, Mumbai',
+      'price': '₹ 1.8 Cr'
+    },
+    {
+      'image': 'https://images.unsplash.com/photo-1512915922686-57711add5914',
+      'title': 'Forest Retreat',
+      'address': 'Mahabaleshwar, Maharashtra',
+      'price': '₹ 2.9 Cr'
+    },
   ];
 
   @override
