@@ -20,61 +20,61 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
   // Sample Property Data
   final List<Map<String, String>> _properties = [
     {
-      'image': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 
+      'image': 'assets/picture/villa_1.jpg', 
       'title': 'Modern Villa', 
-      'address': 'Bandra West, Mumbai',
+      'address': 'Bandra West, Mumbai', 
       'price': '₹ 5.5 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9', 
+      'image': 'assets/picture/penthouse_1.jpg', 
       'title': 'Luxury Penthouse', 
-      'address': 'Worli Sea Face, Mumbai',
+      'address': 'Worli Sea Face, Mumbai', 
       'price': '₹ 12.0 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914', 
+      'image': 'assets/picture/cottage_1.jpg', 
       'title': 'Cozy Cottage', 
       'address': 'Lonavala, Maharashtra',
       'price': '₹ 2.1 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750', 
+      'image': 'assets/picture/beach_house_1.jpg', 
       'title': 'Beach House', 
       'address': 'Alibaug, Maharashtra',
       'price': '₹ 4.8 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1600607687920-4e20b33a8512',
+      'image': 'assets/picture/apartment_1.jpg',
       'title': 'Seaview Apartment',
       'address': 'Marine Drive, Mumbai',
       'price': '₹ 15.5 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1600566752355-35792bedcfea',
+      'image': 'assets/picture/villa_2.jpg',
       'title': 'Hill Station Villa',
       'address': 'Khandala, Maharashtra',
       'price': '₹ 4.2 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1600121848594-d86fe4ca4aa6',
+      'image': 'assets/picture/duplex_1.jpg',
       'title': 'Smart Home Duplex',
       'address': 'Powai, Mumbai',
       'price': '₹ 6.8 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1600047509807-ba8f99c24ce6',
+      'image': 'assets/picture/mansion_1.jpg',
       'title': 'Riverside Mansion',
       'address': 'Karjat, Maharashtra',
       'price': '₹ 3.5 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1600566753190-17340a560962',
+      'image': 'assets/picture/studio_1.jpg',
       'title': 'Premium Studio',
       'address': 'Andheri West, Mumbai',
       'price': '₹ 1.8 Cr'
     },
     {
-      'image': 'https://images.unsplash.com/photo-1512915922686-57711add5914',
+      'image': 'assets/picture/retreat_1.jpg',
       'title': 'Forest Retreat',
       'address': 'Mahabaleshwar, Maharashtra',
       'price': '₹ 2.9 Cr'
@@ -180,7 +180,7 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
               borderRadius: BorderRadius.circular(20),
               child: Stack(
                 children: [
-                  Image.network(
+                  Image.asset(
                     property['image']!,
                     height: double.infinity,
                     width: double.infinity,
