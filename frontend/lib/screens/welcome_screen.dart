@@ -142,8 +142,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 const AppNavigationBar(),
                 SizedBox(
-                  height: 900,
-                  child: Center(
+                  height: 800,
+                  child: Align(
+                    alignment: const Alignment(0, -0.4), // Moves the carousel/form slightly upwards
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),
                       child: _buildFormContent(),

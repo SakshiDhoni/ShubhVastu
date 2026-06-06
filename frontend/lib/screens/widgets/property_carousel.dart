@@ -113,7 +113,7 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     double width = MediaQuery.of(context).size.width;
-    double fraction = width < 800 ? 0.85 : 0.65;
+    double fraction = width < 800 ? 0.90 : 0.75;
     
     if (_lastFraction == null || _lastFraction != fraction) {
       _lastFraction = fraction;
@@ -164,7 +164,7 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
 
     double width = MediaQuery.of(context).size.width;
     bool isMobile = width < 800;
-    double carouselHeight = isMobile ? 380 : 480;
+    double carouselHeight = isMobile ? 440 : 540;
 
     return SizedBox(
       height: carouselHeight, // Responsive height of the cards
