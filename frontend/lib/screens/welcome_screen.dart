@@ -141,10 +141,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Column(
               children: [
                 const AppNavigationBar(),
+                _buildQuoteSection(),
                 SizedBox(
-                  height: 800,
+                  height: 720,
                   child: Align(
-                    alignment: const Alignment(0, -0.4), // Moves the carousel/form slightly upwards
+                    alignment: const Alignment(0, -0.2), // Moves the carousel/form slightly upwards
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),
                       child: _buildFormContent(),
@@ -155,6 +156,59 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const AppFooter(),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuoteSection() {
+    double width = MediaQuery.of(context).size.width;
+    bool isMobile = width < 800;
+
+    return Container(
+      margin: EdgeInsets.only(
+        top: isMobile ? 12.0 : 24.0,
+        bottom: isMobile ? 4.0 : 8.0,
+        left: isMobile ? 16.0 : 40.0,
+        right: isMobile ? 16.0 : 40.0,
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 16.0 : 32.0,
+        vertical: isMobile ? 14.0 : 20.0,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.1),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "“Group bookings offer you dream properties at rates below the market.”",
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.95),
+              fontSize: isMobile ? 14 : 18,
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.italic,
+              height: 1.4,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "Why pay more for the very same property?",
+            style: TextStyle(
+              color: Colors.greenAccent[400],
+              fontSize: isMobile ? 15 : 19,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.2,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
