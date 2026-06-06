@@ -222,7 +222,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   TextSpan(
                     text: "Then why spend more money for the same property?",
                     style: TextStyle(
-                      color: Colors.cyanAccent[200], // Cyan color matching the lotus logo theme
+                      color: const Color(0xFF60A5FA), // Blue color matching the lotus logo theme
                       fontWeight: FontWeight.w800,
                     ),
                   ),
