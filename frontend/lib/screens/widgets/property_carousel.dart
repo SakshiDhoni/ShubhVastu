@@ -23,8 +23,8 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
 
       {
       'image': 'assets/picture/carousel_1.jpg', 
-      'title': 'Richmond - 3 BHK Luxurious Flats', 
-      'address': 'Shri Hari Kute Marg, Nashik', 
+      'title': 'Kedarnath - 3 BHK & Road Front Shops', 
+      'address': 'Indira Nagar, Jagannath Chowk, Nashik',
       'price': 'Contact for Price'
     },
     {
@@ -34,9 +34,9 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
       'price': 'Contact for Price'
     },
     {
-      'image': 'assets/picture/carousel_3.jpg', 
-      'title': 'Kedarnath - 3 BHK & Road Front Shops', 
-      'address': 'Indira Nagar, Jagannath Chowk, Nashik', 
+      'image': 'assets/picture/carousel_3.jpg',
+      'title': 'Richmond - 3 BHK Luxurious Flats', 
+      'address': 'Shri Hari Kute Marg, Nashik',   
       'price': 'Contact for Price'
     },
     
@@ -276,7 +276,7 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
                     right: isMobile ? 8 : 16,
                     child: Builder(
                       builder: (context) {
-                        final String title = property['title']!;
+                        final String title = property['title'] ?? '';
                         String projectName = title;
                         String detailsText = "";
                         if (title.contains(" - ")) {
@@ -331,7 +331,7 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
-                                      property['address']!,
+                                      property['address'] ?? '',
                                       style: TextStyle(color: Colors.grey[300], fontSize: addressFontSize),
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -344,7 +344,7 @@ class _PropertyCarouselState extends State<PropertyCarousel> {
                                   Icon(Icons.account_balance_wallet, color: Colors.white70, size: iconSize),
                                   const SizedBox(width: 8),
                                   Text(
-                                    property['price']!,
+                                    property['price'] ?? '',
                                     style: TextStyle(color: Colors.greenAccent, fontSize: priceFontSize, fontWeight: FontWeight.bold),
                                   ),
                                 ],

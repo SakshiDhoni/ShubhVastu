@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:ui';
 // import '../services/api_service.dart'; // ApiService call is commented out below
 
 // Import widget components
@@ -166,51 +167,70 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     double width = MediaQuery.of(context).size.width;
     bool isMobile = width < 800;
 
-    return Container(
-      margin: EdgeInsets.only(
-        top: isMobile ? 12.0 : 24.0,
-        bottom: isMobile ? 4.0 : 8.0,
-        left: isMobile ? 16.0 : 40.0,
-        right: isMobile ? 16.0 : 40.0,
-      ),
+    return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16.0 : 32.0,
-        vertical: isMobile ? 14.0 : 20.0,
+        horizontal: isMobile ? 16.0 : 40.0,
+        vertical: isMobile ? 12.0 : 20.0,
       ),
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.1),
-          width: 1,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 20.0 : 40.0,
+              vertical: isMobile ? 16.0 : 24.0,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.25),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.18),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                )
+              ],
+            ),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: isMobile ? 15 : 22,
+                  fontWeight: FontWeight.bold,
+                  height: 1.4,
+                  letterSpacing: 0.3,
+                  shadows: [
+                    Shadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    )
+                  ],
+                ),
+                children: [
+                  const TextSpan(
+                    text: "Group bookings can offer you dream properties at lower rates than market rates,\n",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "Then why spend more money for the same property?",
+                    style: TextStyle(
+                      color: Colors.cyanAccent[200], // Cyan color matching the lotus logo theme
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "“Group bookings offer you dream properties at rates below the market.”",
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.95),
-              fontSize: isMobile ? 14 : 18,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.italic,
-              height: 1.4,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "Why pay more for the very same property?",
-            style: TextStyle(
-              color: Colors.greenAccent[400],
-              fontSize: isMobile ? 15 : 19,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.2,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }
